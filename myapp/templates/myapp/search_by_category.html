@@ -1,0 +1,16 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+
+<h1>Поиск</h1>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Искать</button>
+    </form>
+
+{% endblock %}

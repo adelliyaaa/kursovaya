@@ -1,0 +1,49 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}
+Отредактировать портфолио
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">Отредактировать портфолио</h1>
+        <form method="post" class="my-4">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_title">Заголовок:</label>
+                {{ form.title }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_description">Описание:</label>
+                {{ form.description }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_image">Изображение:</label>
+                {{ form.image }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_link">Ссылка:</label>
+                {{ form.link }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_category">Категория:</label>
+                {{ form.category }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_tags">Теги:</label>
+                {{ form.tags }}
+            </div>
+
+            <button type="submit" class="btn btn-success">Добавить</button>
+            <span>{{ error }}</span>
+        </form>
+    </div>
+
+{% endblock %}

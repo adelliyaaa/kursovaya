@@ -1,0 +1,25 @@
+{% extends 'myapp/base2.html' %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <div class="col-md-6 border p-3"> <!-- Добавлены классы border и p-3 -->
+        <div class="text-center">
+            <h1 class="my-4">Вход</h1>
+        </div>
+        <form method="post" class="my-4">
+            <div class="text-center"> <!-- Добавленный класс text-center -->
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Войти</button><br>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'myapp:registration_view' %}"> Зарегистрироваться</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

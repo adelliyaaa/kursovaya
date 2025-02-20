@@ -1,0 +1,43 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <div class="container mt-4">
+        <h1 class="mb-4">Портфолио</h1>
+        <form method="get" action="{% url 'myapp:search_projects_by_category' %}">
+            {{ form.category }}
+            <button type="submit">Найти по категории</button>
+        </form><br>
+        {% if projects %}
+            <div class="row">
+                {% for el in projects %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            {% if el.image %}
+                                <img src="{{ el.image.url }}" class="card-img-top img-fluid" alt="{{ el.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h3 class="card-title">{{ el.title }}</h3>
+                                <p class="card-text">{{ el.description|linebreaksbr }}</p>
+                                <a href="{{ el.link }}" class="btn btn-primary">Ссылка</a>
+                                <a href="{% url 'myapp:project_images' project_id=el.id %}" class="btn btn-secondary">Подробнее</a><br>
+                                <p>{% for tag in el.tags.all %}#{{ tag }} {% endfor %}</p>
+                                <p>Категория: {{ el.category }}</p>
+                                <p>Дата создания: {{ el.created_at }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Нет доступных проектов</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+

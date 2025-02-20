@@ -1,0 +1,38 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<h1>Пользователь: {{ project.user.username }}</h1>
+<h2>email: {{ project.user.email }}</h2>
+
+<h1>{{ project.title }}</h1>
+<p>{{ project.description|linebreaksbr }}</p>
+
+
+{% if project.images.all %}
+  <h2>Галерея изображений:</h2>
+  <div class="row">
+    {% for image in project.images.all %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="{{ image.image.url }}" class="card-img-top img-fluid" alt="{{ image.title }}">
+          <div class="card-body">
+            <p class="card-text">{{ image.description }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+<a href="{{ project.link }}">Visit Project</a>
+{% endblock %}
+
+

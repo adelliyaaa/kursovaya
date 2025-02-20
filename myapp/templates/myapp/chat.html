@@ -1,0 +1,24 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <h1>Чат с тех.поддержкой</h1>
+   <ul>
+       {% for message in messages %}
+           <li>{{ message.user.username }} - {{ message.content }} - {{ message.timestamp }}</li>
+       {% endfor %}
+   </ul>
+
+   <form method="post" action="{% url 'myapp:send_message'%}">
+       {% csrf_token %}
+       <input type="text" name="content">
+       <button type="submit">Отправить</button>
+   </form>
+{% endblock %}
+
+
